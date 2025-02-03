@@ -1,0 +1,7 @@
+## Interface: 11302
+## Title: Picky
+## Notes: Shows profession skill required for gathering Herbalism and Mining nodes
+## Authors: Chark0, SydBal
+## Version: 1.0
+
+Picky.lua
