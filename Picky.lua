@@ -399,7 +399,6 @@ local function SetSkillColor(playerSkill, nodeData)
 	-- Determine the color based on skill comparison with Node
 	local color
 	if playerSkill < nodeData.skill["orange"] then
-		print(":yikrtd")
 		color = "|cffff0000"  -- Red (Cannot gather)
 	elseif playerSkill <= nodeData.skill["yellow"] then
 		color = "|cffff8000"  -- Orange (Guaranteed skill-up)
