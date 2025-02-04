@@ -14,50 +14,49 @@
 
 -- Mining skill level requirements
 local MiningNodes = {
-		["Copper Vein"] = 1,
-		["Tin Vein"] = 65,
-		["Silver Vein"] = 75,
-		["Iron Deposit"] = 125,
-		["Gold Vein"] = 155,
-		["Mithril Deposit"] = 175,
-		["Truesilver Deposit"] = 230,
-		["Small Thorium Vein"] = 250,
-		["Rich Thorium Vein"] = 275,
-		["Ooze Covered Thorium Vein"] = 245
-	}
+	["Copper Vein"] = 1,
+	["Tin Vein"] = 65,
+	["Silver Vein"] = 75,
+	["Iron Deposit"] = 125,
+	["Gold Vein"] = 155,
+	["Mithril Deposit"] = 175,
+	["Truesilver Deposit"] = 230,
+	["Small Thorium Vein"] = 250,
+	["Rich Thorium Vein"] = 275,
+	["Ooze Covered Thorium Vein"] = 245
+}
 
 -- Herbalism skill level requirements
 local HerbNodes = {
-		["Peacebloom"] = 1,
-		["Silverleaf"] = 1,
-		["Earthroot"] = 15,
-		["Mageroyal"] = 50,
-		["Briarthorn"] = 70,
-		["Stranglekelp"] = 85,
-		["Bruiseweed"] = 100,
-		["Wild Steelbloom"] = 115,
-		["Grave Moss"] = 120,
-		["Kingsblood"] = 125,
-		["Liferoot"] = 150,
-		["Fadeleaf"] = 160,
-		["Goldthorn"] = 170,
-		["Khadgar's Whisker"] = 185,
-		["Wintersbite"] = 195,
-		["Firebloom"] = 205,
-		["Purple Lotus"] = 210,
-		["Wildvine"] = 210,
-		["Sungrass"] = 230,
-		["Blindweed"] = 235,
-		["Ghost Mushroom"] = 245,
-		["Gromsblood"] = 250,
-		["Golden Sansam"] = 260,
-		["Dreamfoil"] = 270,
-		["Mountain Silversage"] = 280,
-		["Plaguebloom"] = 285,
-		["Icecap"] = 290,
-		["Black Lotus"] = 300
-	}
-
+	["Peacebloom"] = 1,
+	["Silverleaf"] = 1,
+	["Earthroot"] = 15,
+	["Mageroyal"] = 50,
+	["Briarthorn"] = 70,
+	["Stranglekelp"] = 85,
+	["Bruiseweed"] = 100,
+	["Wild Steelbloom"] = 115,
+	["Grave Moss"] = 120,
+	["Kingsblood"] = 125,
+	["Liferoot"] = 150,
+	["Fadeleaf"] = 160,
+	["Goldthorn"] = 170,
+	["Khadgar's Whisker"] = 185,
+	["Wintersbite"] = 195,
+	["Firebloom"] = 205,
+	["Purple Lotus"] = 210,
+	["Wildvine"] = 210,
+	["Sungrass"] = 230,
+	["Blindweed"] = 235,
+	["Ghost Mushroom"] = 245,
+	["Gromsblood"] = 250,
+	["Golden Sansam"] = 260,
+	["Dreamfoil"] = 270,
+	["Mountain Silversage"] = 280,
+	["Plaguebloom"] = 285,
+	["Icecap"] = 290,
+	["Black Lotus"] = 300
+}
 
 -- Add check to make sure this isn't a unit,item or spell.
 -- since we determined the nodes didnt react to these checks.
@@ -72,14 +71,14 @@ local HerbNodes = {
 -- 6 add skinning?
 
 local function GetProfessionSkillLevel(professionName)
-    -- Loop through both primary profession slots
-    for i = 1, GetNumSkillLines() do
-        local skillName, _, _, skillLevel = GetSkillLineInfo(i)
-        if skillName == professionName then
-            return skillLevel
-        end
-    end
-    return 0  -- Return 0 if the profession is not found
+	-- Loop through both primary profession slots
+	for i = 1, GetNumSkillLines() do
+		local skillName, _, _, skillLevel = GetSkillLineInfo(i)
+		if skillName == professionName then
+			return skillLevel
+		end
+	end
+	return 0  -- Return 0 if the profession is not found
 end
 
 local function SetSkillColor(playerSkill, requiredSkill)
@@ -100,20 +99,20 @@ local function SetSkillColor(playerSkill, requiredSkill)
 end
 
 local function ModifyTooltip()
-    local tooltipText = _G["GameTooltipTextLeft1"] and _G["GameTooltipTextLeft1"]:GetText()
-    local requiredSkill
-	local playerSkill 
+	local tooltipText = _G["GameTooltipTextLeft1"] and _G["GameTooltipTextLeft1"]:GetText()
+	local requiredSkill
+	local playerSkill
 
 	-- Determine if the tooltip is for an herb or mining node
-    if MiningNodes[tooltipText] then
-        requiredSkill = MiningNodes[tooltipText]
-        playerSkill = GetProfessionSkillLevel("Mining")
-	
-	elseif HerbNodes[tooltipText] then
-        requiredSkill = HerbNodes[tooltipText]
-        playerSkill = GetHerbSkillLevel("Herbalism")
+	if MiningNodes[tooltipText] then
+		requiredSkill = MiningNodes[tooltipText]
+		playerSkill = GetProfessionSkillLevel("Mining")
 
-    end
+	elseif HerbNodes[tooltipText] then
+		requiredSkill = HerbNodes[tooltipText]
+		playerSkill = GetHerbSkillLevel("Herbalism")
+
+	end
 
 	if requiredSkill then
 		-- determine color of the required skill level
